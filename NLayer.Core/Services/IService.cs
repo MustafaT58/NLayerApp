@@ -9,6 +9,7 @@ namespace NLayer.Core.Services
 {
     public interface IService<T> where T : class
     {
+        //IService deki metotların IRepositoryden Farkı dönüş tiplerini farkllı olmsıdır
         Task<T> GetByAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
         IQueryable<T> Where(Expression<Func<T, bool>> expression);

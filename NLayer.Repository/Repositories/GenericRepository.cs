@@ -11,7 +11,7 @@ namespace NLayer.Repository.Repositories
 {
     public class GenericRepository<T> : IGenericRepositıry<T> where T : class
     {
-        protected readonly AppDbContext _context;
+        protected readonly AppDbContext _context;   //Sadece Constructor içinde set edebilmemiz için readonly tanımladık.
         private readonly DbSet<T> _dbSet;
         public GenericRepository(AppDbContext context)
         {
@@ -35,7 +35,9 @@ namespace NLayer.Repository.Repositories
 
         public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
         {
-            return _dbSet.AsNoTracking().AsQueryable();
+            //AsNoTracking EF Core çekmiş olduğu dataları memory e almaması izlememesi için kullanılır
+            //Herhangi bir güncelleme,silme yada ekleme işlemi yapılmadığı için böyle kullanmak doğrudur ve performans arttırır.
+            return _dbSet.AsNoTracking().AsQueryable(); 
         }
 
         public async Task<T> GetByAsync(int id)
@@ -43,7 +45,8 @@ namespace NLayer.Repository.Repositories
             return await _dbSet.FindAsync(id); 
         }
 
-        public void Remove(T entity)
+        //Burada veri işlemleri Db de değil de memory de olduğu için Update ve Remove Metotlarının Async özelliği yoktur.!!
+        public void Remove(T entity) 
         {
             _dbSet.Remove(entity);
         }

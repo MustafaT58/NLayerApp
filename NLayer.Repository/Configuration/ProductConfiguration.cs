@@ -20,7 +20,8 @@ namespace NLayer.Repository.Configuration
 
             builder.Property(x=>x.Price).IsRequired().HasColumnType("decimal(18,2)");
 
-            builder.HasOne(x=>x.Category).WithMany(x=>x.Products).HasForeignKey(x=>x.CategoryId);
+            builder.HasOne(x=>x.Category).WithMany(x=>x.Products).HasForeignKey(x=>x.CategoryId);//Foreing Key bire çok ilişki yapısının Fluent Api ile oluşturulması. 
+            //Bir product ın bir Category si olabilir.Bir Category nin birden fazla product ı olabilir.
         }
     }
 }

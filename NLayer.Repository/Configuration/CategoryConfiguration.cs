@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace NLayer.Repository.Configuration
 {
-    internal  class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    internal  class CategoryConfiguration : IEntityTypeConfiguration<Category> //Fluent API sınıfı 
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.Id);                           //Fluent Api
             builder.Property(x=>x.Id).UseIdentityColumn();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
 

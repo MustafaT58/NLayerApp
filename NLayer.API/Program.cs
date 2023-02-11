@@ -22,7 +22,8 @@ namespace NLayer.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //Burada ilk yazdýðýmýz interface ile karþýlaþýrsak ikinci yazdýðýmýz class ý nesne örneði almasý için scoped belirlitoruz.
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); 
             builder.Services.AddScoped(typeof(IGenericRepositýry<>), typeof(GenericRepository<>));
             //builder.Services.AddScoped(typeof(IService<>), typeof(s<>));
 
@@ -31,9 +32,10 @@ namespace NLayer.API
 
             builder.Services.AddDbContext<AppDbContext>(x =>
             {
-                x.UseSqlServer(builder.Configuration.GetConnectionString("Baglanti"), option =>
+                x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>   //DbContext in hangi Assembly içerisinde olduðunu belirtmek için yazýyoruz.
                 {
-                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name); //Tip güvenliði için yaptýk.
+                    //option.MigrationsAssembly("NLayer.Repository"); bu þekilde yazabilirdik ancak Tip güvenliði için aþaðýdaki gibi yaptýk.
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name); 
                 });
             });
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core
 {
-    public abstract class BaseEntity
+    public abstract class BaseEntity // Herhangi bir nesne oşuşturulamaması için abstract olarak tanımladık.
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }

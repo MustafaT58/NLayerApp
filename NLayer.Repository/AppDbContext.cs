@@ -19,7 +19,11 @@ namespace NLayer.Repository
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //Bulunduğumuz assembly içerisindeki tüm Configuration dosyalarını okumak için bunu kullanırız
+            //EF Core un Configuration dosyalarını görmesi için
+            //Bu kod IEntityTypeConfiguration interface sine sahip bütün clasları bulup uygular.
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); 
+            
 
             modelBuilder.Entity<ProductFeature>().HasData(
                 new ProductFeature()

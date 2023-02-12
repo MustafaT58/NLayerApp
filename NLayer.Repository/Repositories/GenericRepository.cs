@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿ using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -33,14 +33,14 @@ namespace NLayer.Repository.Repositories
             return await _dbSet.AnyAsync(expression);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
+        public IQueryable<T> GetAll()
         {
             //AsNoTracking EF Core çekmiş olduğu dataları memory e almaması izlememesi için kullanılır
             //Herhangi bir güncelleme,silme yada ekleme işlemi yapılmadığı için böyle kullanmak doğrudur ve performans arttırır.
             return _dbSet.AsNoTracking().AsQueryable(); 
         }
 
-        public async Task<T> GetByAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id); 
         }

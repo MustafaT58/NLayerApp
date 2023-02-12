@@ -4,8 +4,8 @@ namespace NLayer.Core.Repositories
 {
     public interface IGenericRepositıry<T> where T : class
     {
-        Task<T> GetByAsync(int id); //Async olduğu için task dönütoruz.
-        IQueryable<T> GetAll(Expression<Func<T, bool>> expression); 
+        Task<T> GetByIdAsync(int id); //Async olduğu için task dönütoruz.
+        IQueryable<T> GetAll(); 
 
         //productRepository.where(x=>x.id>5).OrderBy.ToListAsync(); 
         //Veritabanından alırken sıralama yapabilmek için IQuerable döneriz.Böyle yapmazsak ilk önce veriyi çeker sonra memory de sıralama yapar.Bu da memory i yorar. 

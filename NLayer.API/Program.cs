@@ -5,6 +5,8 @@ using NLayer.Core.UnitOfWorks;
 using NLayer.Repository;
 using NLayer.Repository.Repositories;
 using NLayer.Repository.UnitOfWork;
+using NLayer.Service.Mapping;
+using NLayer.Service.Services;
 using System.Reflection;
 
 namespace NLayer.API
@@ -25,9 +27,9 @@ namespace NLayer.API
             //Burada ilk yazdýðýmýz interface ile karþýlaþýrsak ikinci yazdýðýmýz class ý nesne örneði almasý için scoped belirlitoruz.
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); 
             builder.Services.AddScoped(typeof(IGenericRepositýry<>), typeof(GenericRepository<>));
-            //builder.Services.AddScoped(typeof(IService<>), typeof(s<>));
+            builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
-
+            builder.Services.AddAutoMapper(typeof(MapProfile));
 
 
             builder.Services.AddDbContext<AppDbContext>(x =>
